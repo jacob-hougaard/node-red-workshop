@@ -4,7 +4,7 @@ This github repository is meant for learning how to setup and use node-red with 
 
 ## Node-red overview. 
 
-To avoid later confusions, the image below will give a quick overview on naviagting in node red. take carefull note on the location of the **debug view**, since it will be referenced later.
+To avoid later confusions, the image below will give a quick overview on navigating in node red. take carefull note on the location of the **debug view**, since it will be referenced later.
 
 ![node-red-overview](./assets/node-red-overview.png)
 
