@@ -2,6 +2,10 @@
 
 This github repository is meant for learning how to setup and use node-red with IBM services on IBM cloud.
 
+[TOC]
+
+
+
 ## Node-red overview. 
 
 To avoid later confusions, the image below will give a quick overview on navigating in node red. take carefull note on the location of the **debug view**, since it will be referenced later.
@@ -184,3 +188,34 @@ We will start by dragging a **Form** node from the dashboard category into our w
 
 Double click on the form and look in the input field which says "*Form elements*" add three elements to your form. These should look as pictured below![form-elements](./assets/form-elements.png)
 
+Now, whenever we push the submit button on this form, we want to store it in our cloudant database.
+
+Go to the side menu and under the storage category, choose the ***"cloudant out"*** node. Drag the node into your flow and connect it to your form node.
+
+Double click on the **cloudant out node**. The cloudant instance we created when we created node-red should already be connected to the service, all you have to do is choose it from the *Service* dropdown. The specific name of the database is not important since it will be created for you upon first inserting, but there needs to be a name in the field. you also have to choose ***insert*** as the operation (see below). ![cloudant-out](./assets/cloudant-out.png)
+
+Whenever we get a new input from the database, we want to be able to get it out and display it, to get the data from the database, we use the ***cloudant in*** node. drag it on to your flow and double click it like before. This time you want **search by all documents**.
+
+attach the **cloudant in** node to your form and attach a **debug** node to the end of it to see what is returned. 
+
+the database part of your flow should now look something like below
+
+![cloudant-flow](./assets/cloudant-flow.png)now deploy your flow and go to your UI, then fill out your form and go back and look at the result in the debug screen.
+
+**Did you notice something wrong?**
+
+The problem is that the database is read at the same time as data is being inserted (or maybe even before) which means that we do not get the newest data. 
+
+To avoid this we can place a delay node between the form and the **Cloudant in** node.
+
+a delay on the node of 1 second should be sufficient, depending on your internet speed. 
+
+After doing this you should be able to see updated data inside the debug window
+
+## Challenge!
+
+Now that you have gotten some basic insight into how to use node red with node-red-dashboard, we want you to display the fetched data inside the dashboard in a way which makes sense. Take a look at the nodes in the dashboard category and notice if any of them will be helpfull to you. You can also just parse the data with the **function** node and display it in a gauge like before. 
+
+ ![dashboard-overview](/Users/jacobhougaardbennedsen/WebstormProjects/node-red-workshop/assets/dashboard-overview.png)
+
+## Solution to challenge.
