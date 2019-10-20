@@ -74,6 +74,8 @@ From your new credentials, copy the username, password and host and save them fo
 
 Now that we have created all of the instances that we need, we can start creating components and displaying data from our node-red instance. 
 
+### Showing weather data within the UI.
+
 In your browser, go to your node-red service and scroll to the IBM Watson category in the menu to the left.
 
 ![empty-dashboard](./assets/empty-dashboard.png)
@@ -106,7 +108,7 @@ From here you can just click add, as the default values are fine for our example
 
 Now press **deploy** in the top right corner of node-red and go to your UI page. From here you should be able to see the button.
 
-now go back to your node-red dashboard and double click on the **weather insight node** in the flow. Here you can paste in your **username**, **password** and **hostname** from before, under service, choose **current observations** for longitude and latitude use *55.735660,9.126420* which is the location of the legoland hotel in Billun Denmark.
+now go back to your node-red dashboard and double click on the **weather insight node** in the flow. Here you can paste in your **username**, **password** and **hostname** from before, under service, choose **current observations** for longitude and latitude use *55.735660,9.126420* which is the location of the legoland hotel in Billund Denmark.
 
 now go to the top of the side menu in node red and drag the **debug** onto your flow and connect it to the other end of your weather insights. 
 
@@ -131,3 +133,46 @@ Double click on the **gauge** node, it should already be setup to your home tab,
 ![Value-format](./assets/Value-format.png)
 
 press **deploy** again, go to the UI and click on the button. You should now see the temperature value displayed within the **gauge**.
+
+### Setting up Text to Speech.
+
+In this section we want to build a text input field in our UI which is able to read text. 
+
+Start by dragging an **audio out** node from the dashboard category onto the dashboard and configure it as earlier. Then connect it to the end of your **Text to Speech** node as pictured below. 
+
+![tts-audioOut](./assets/tts-audioOut.png)
+
+Now double click on the **Text to Speech** node and a configuration window should appear. Inside the window you need to fill out the following fields
+
+**Username**: this is simply "apikey"
+
+**Password**: The API key you copied earlier
+
+**API Key**: The API key you copied earlier as well
+
+**Service Endpoint**: The URL you copied from earlier.
+
+**Language**: English
+
+------
+
+As you can see inside the configuration of the **Text to Speech** node, there is no choice of extracting the payload like there was in the gauge. This means that before we can convert text to speech, we first need to parse the data which comes in to the node.
+
+Towards the top of the left menu you will find a category called **function** with a node of the same name, drag this onto your flow and connect it to the start of your **text to speech node**. 
+
+Now double click on the function node and paste in the following
+
+```
+let pl = {"payload":"The current temperature is " + msg.observation.temp + " degrees"}
+
+return pl;
+```
+
+This should make it so whenever we get the weather from our service, the result should also be read aloud by our assistant.
+
+Now connect the function node to your weather service as pictured below.
+
+![tts-setup](./assets/tts-setup.png)
+
+Now as before, deploy your setup and go to your UI and press the button, you should now get the current temperature read out loud.
+
