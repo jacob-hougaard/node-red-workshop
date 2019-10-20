@@ -30,7 +30,7 @@ When your node-red instance is ready, click on the link which says "Visit App UR
 
 
 
-#### Configuring your node-red service.
+## Configuring your node-red service.
 
 When opening the node-red service for the first time, you will be prompted with a screen, asking you to create a username and password for your service. This is not mandatory, but highly recommended, since if you choose not to, your instance will be available publicly. 
 
@@ -44,7 +44,7 @@ When entering your workflow click on the menu at the top left of the screen, and
 
 a user settings panel should pop up (see above). From here, click on the install tab and search for node-red dashboard and click on the install button.
 
-### Setting up text to speech and Weather services
+## Setting up text to speech and Weather services
 
 The node-red service on IBM cloud comes with a variaty of integrations to IBM cloud services. In this tutorial, we have choosen to include Text to Speech and Weather integration, since these have different ways of connecting to node red, they are perfect for a tutorial.
 
@@ -70,11 +70,9 @@ From your new credentials, copy the username, password and host and save them fo
 
 9.126420
 
-## Setting up our dashboard.
+## Setting up our dashboard and showing weather data.
 
 Now that we have created all of the instances that we need, we can start creating components and displaying data from our node-red instance. 
-
-### Showing weather data within the UI.
 
 In your browser, go to your node-red service and scroll to the IBM Watson category in the menu to the left.
 
@@ -134,7 +132,7 @@ Double click on the **gauge** node, it should already be setup to your home tab,
 
 press **deploy** again, go to the UI and click on the button. You should now see the temperature value displayed within the **gauge**.
 
-### Setting up Text to Speech.
+## Setting up Text to Speech.
 
 In this section we want to build a text input field in our UI which is able to read text. 
 
@@ -163,16 +161,26 @@ Towards the top of the left menu you will find a category called **function** wi
 Now double click on the function node and paste in the following
 
 ```
-let pl = {"payload":"The current temperature is " + msg.observation.temp + " degrees"}
+let pl = {"payload":"The current temperature in " + msg.observation.obs_name +"is " + msg.observation.temp + " degrees"}
 
 return pl;
 ```
 
-This should make it so whenever we get the weather from our service, the result should also be read aloud by our assistant.
+This should make it so whenever we get the weather from our service, the result should also be read aloud by our assistant. *"msg.observation.obs_name"* also gives us the name of the city which the weather is displayed from. 
 
 Now connect the function node to your weather service as pictured below.
 
 ![tts-setup](./assets/tts-setup.png)
 
-Now as before, deploy your setup and go to your UI and press the button, you should now get the current temperature read out loud.
+Now as before, deploy your setup, go to your UI and press the button, you should now get the current temperature read out loud.
+
+## Collecting user input
+
+In this section we will look at how we can store user data in our database as well as fetch it and display it in our UI.
+
+We will start by dragging a **Form** node from the dashboard category into our workflow. 
+
+![form](./assets/form.png)
+
+Double click on the form and look in the input field which says "*Form elements*" add three elements to your form. These should look as pictured below![form-elements](./assets/form-elements.png)
 
