@@ -2,6 +2,12 @@
 
 This github repository is meant for learning how to setup and use node-red with IBM services on IBM cloud.
 
+## Node-red overview. 
+
+To avoid later confusions, the image below will give a quick overview on naviagting in node red. take carefull note on the location of the **debug view**, since it will be referenced later.
+
+![node-red-overview](./assets/node-red-overview.png)
+
 ## Prerequisites. 
 
 Before we begin, we need to setup some services on IBM cloud, mainly *node-red community*, *Weather services* and *Watson Text To Speech*.
