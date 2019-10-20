@@ -120,14 +120,14 @@ Now press **deploy**, go to your UI and press the button.
 
 In the debug view, you should be able to see the payload from the weather insights node in json form. What we are interested in is the observation object, and inside it the temperature(**temp**) value.
 
-![temp-position](/Users/jacobhougaardbennedsen/WebstormProjects/node-red-workshop/assets/temp-position.png)
+![temp-position](./assets/temp-position.png)
 
 Now go down and find the **Gauge** node from the **Dashboard** category in the side menu, drag it into your flow and connect it at the end of your **weather insights** node.
 
-![button-weather-gauge](/Users/jacobhougaardbennedsen/WebstormProjects/node-red-workshop/assets/button-weather-gauge.png)
+![button-weather-gauge](./assets/button-weather-gauge.png)
 
 Double click on the **gauge** node, it should already be setup to your home tab, but we need to define it's input so it only displays the temperature data from our **msg.observations** object. This can be done by writing {{msg.observation.temp}} inside the **Value format** input.
 
-![Value-format](/Users/jacobhougaardbennedsen/WebstormProjects/node-red-workshop/assets/Value-format.png)
+![Value-format](./assets/Value-format.png)
 
 press **deploy** again, go to the UI and click on the button. You should now see the temperature value displayed within the **gauge**.
