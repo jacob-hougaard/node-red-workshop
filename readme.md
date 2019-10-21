@@ -14,9 +14,13 @@ Before we begin, we need to setup some services on IBM cloud, mainly *node-red c
 
 #### Setup service.
 
+Go to: https://cloud.ibm.com/
+
 To setup your service, go to IBM cloud, and click on "create resource" on the top of the page. 
 
-In the search bar on the top of the page, write node-red. Choose the one which says "Community" below the name. ![Node-red Starter](./assets/Node-red Starter.png)
+In the search bar on the top of the page, write node-red. Choose the one which says "Community" below the name. 
+
+![Node-red Starter](./assets/Node-red Starter.png)
 
 You now have to choose the option which says "Cloudant". This will create a no-sql database along with your instance which will store your configurations and can be used for saving data from nodes. 
 
@@ -24,7 +28,7 @@ You now have to choose the option which says "Cloudant". This will create a no-s
 
 Afterwards the service might take a couple of minutes to start up. 
 
-When your node-red instance is ready, click on the link which says "Visit App URL" next to the name. 
+When your node-red instance is ready, you will be redirected to your new Node-Red instance, click on the link that says "Visit App URL" next to the name. 
 
 
 
@@ -32,29 +36,23 @@ When your node-red instance is ready, click on the link which says "Visit App UR
 
 When opening the node-red service for the first time, you will be prompted with a screen, asking you to create a username and password for your service. This is not mandatory, but highly recommended, since if you choose not to, your instance will be available publicly. 
 
-After exiting the setup, you should be presented with a web-page with a large button. Click on the button to go to your node-red flow. 
-
-#### Node-red overview. 
-
-When entering the node red flow, you will be presented with the image seen below. To avoid later confusions, the image below will give a quick overview on navigating in node red. take carefull note of these since they will be referenced throughout the tutorial.
-
-![node-red-overview](/Users/jacobhougaardbennedsen/WebstormProjects/node-red-workshop/assets/node-red-overview.png)
-
-### 
+After the setup, you should be presented with a web-page with a large button that says: "Go to your Node-RED flow editor". Click on the button to go to your node-red flow. 
 
 #### Installing node-red dashboard.
 
-When entering your workflow click on the menu at the top left of the screen, and click on *"Manage palette"*
+Node-red dashboard lets you create GUIs in a flash, we will need it later so let's install it:
+
+When entering your workflow click on the menu at the top right of the screen, and click on *"Manage palette"*
+
+A user settings panel should pop up. From here, click on the **install tab** and search for **node-red dashboard** and click on the install button.
 
 ![secure-node-red](./assets/secure-node-red.png)
-
-a user settings panel should pop up (see above). From here, click on the install tab and search for node-red dashboard and click on the install button.
 
 ## Setting up text to speech and Weather services
 
 The node-red service on IBM cloud comes with a variaty of integrations to IBM cloud services. In this tutorial, we have choosen to include Text to Speech and Weather integration, since these have different ways of connecting to node red, they are perfect for a tutorial.
 
-To start off, open a new tab with IBM cloud in your browser and navigate to the "create resource" page like before.
+To start of, open a new tab with IBM cloud in your browser and navigate to the "create resource" page like before.
 
 On the panel on the left click on "AI" and choose the service called "Text to speech"![Text-to-speech](./assets/Text-to-speech.png)
 
@@ -66,6 +64,7 @@ for weather services, go back to "create resource" and create an instance with "
 
 From your new credentials, copy the username, password and host and save them for later.
 
+
 ## Setting up our dashboard and showing weather data.
 
 Now that we have created all of the instances that we need, we can start creating components and displaying data from our node-red instance. 
@@ -74,9 +73,15 @@ In your browser, go to your node-red service and scroll to the IBM Watson catego
 
 ![empty-dashboard](./assets/empty-dashboard.png)
 
-Above the IBM Watson category you should also see one called **weather** with a node called "**weather insights**" inside it. Drag it to the "flow" along with the Text to Speech IBM Watson node. ![weather-insights-tts](./assets/weather-insights-tts.png)
+Above the IBM Watson category you should also see one called **weather** with a node called "weather insights" inside it. Drag it to the "flow" along with the Text to Speech IBM Watson node. ![weather-insights-tts](./assets/weather-insights-tts.png)
 
 we now need to start building our dashboard. Open up a new tab in your browser and go to {your-node-red-url}/ui you should be presented with the following screen: 
+
+e.g.: 
+
+***Yes***: "volaris-test.eu-gb.cf.appdomain.cloud**/ui/**"
+
+*No*: "volaris-test.eu-gb.cf.appdomain.cloud/red/#flow/8297de68.c20e4**/ui/**"
 
 ![no-ui](./assets/no-ui.png)
 
@@ -90,9 +95,11 @@ What happens now is that every time we click the button on the UI, the **weather
 
 Now, before we can do this, we need to setup our dashboard. Double click on your button node and a menu will pop up.
 
+![button-setup](./assets/button-setup.png)
+
 This will bring up a menu from which we can configure the button. The only thing that we have to worry about for now is the tab at the top which says "Group". The Group dictates where and on which sub-page the button is situated in the interface. 
 
-![button-setup](/Users/jacobhougaardbennedsen/WebstormProjects/node-red-workshop/assets/button-setup.png)
+![button-setup](./assets/button-setup.png)
 
 Click on the pencil next to the dropdown and you will be presented with another panel.
 
@@ -211,8 +218,6 @@ the database part of your flow should now look something like below
 
 The problem is that the database is read at the same time as data is being inserted (or maybe even before) which means that we do not get the newest data. 
 
-
-
 To avoid this we can place a delay node between the form and the **Cloudant in** node.
 
 a delay on the node of 1 second should be sufficient, depending on your internet speed. 
@@ -225,7 +230,7 @@ After doing this you should be able to see updated data inside the debug window
 
 Now that you have gotten some basic insight into how to use node red with node-red-dashboard, we want you to display the fetched data inside the dashboard in a way which makes sense. Take a look at the nodes in the dashboard category and notice if any of them will be helpfull to you. will you be able to use a gauge like before?
 
- ![dashboard-overview](/Users/jacobhougaardbennedsen/WebstormProjects/node-red-workshop/assets/dashboard-overview.png)
+ ![dashboard-overview](./assets/dashboard-overview.png)
 
  (Hint: you need to use a **function** node to parse the data from the database). If you are not a big fan of javascript, you can get some inspiration from the following code snippet
 
