@@ -193,6 +193,8 @@ We will start by dragging a **Form** node from the dashboard category into our w
 
 Double click on the form and look in the input field which says "*Form elements*" add three elements to your form. These should look as pictured below![form-elements](./assets/form-elements.png)
 
+Also, add another **Group** called "userform" in the **home** tab.
+
 Now, whenever we push the submit button on this form, we want to store it in our cloudant database.
 
 Go to the side menu and under the storage category, choose the ***"cloudant out"*** node. Drag the node into your flow and connect it to your form node.
