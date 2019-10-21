@@ -20,7 +20,7 @@ To setup your service, go to IBM cloud, and click on "create resource" on the to
 
 In the search bar on the top of the page, write node-red. Choose the one which says "Community" below the name. 
 
-![Node-red Starter](./assets/Node-red Starter.png)
+![Node-red Starter](./assets/Node-red-Starter.png)
 
 You now have to choose the option which says "Cloudant". This will create a no-sql database along with your instance which will store your configurations and can be used for saving data from nodes. 
 
