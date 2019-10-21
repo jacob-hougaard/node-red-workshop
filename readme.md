@@ -136,6 +136,11 @@ Double click on the **gauge** node, it should already be setup to your home tab,
 
 press **deploy** again, go to the UI and click on the button. You should now see the temperature value displayed within the **gauge**.
 
+### Individual exercise 1
+
+- Right now your gauge goes from 0 to 10, can you change it so the gauge goes from -10 to 50?
+- Try out different types of gauges? How would it look if it was dougnut shaped instead? better?
+
 ## Setting up Text to Speech.
 
 In this section we want to build a text input field in our UI which is able to read text. 
